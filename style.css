@@ -13,7 +13,8 @@ nav {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  width: 150px;
+  width: 250px;
+  margin: 20px;
 }
 
 header {
@@ -30,6 +31,7 @@ header {
   height: 50px;
   background-color: brown;
   border: 3px solid black;
+  margin-top: 0;
 }
 
 .areaOfPlay {
@@ -37,21 +39,24 @@ header {
   justify-content: space-around;
 }
 
-.first {
+.pole {
+  width: 25px;
+  height: 200px;
+  background-color: #707c98;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
 }
 
-.pole {
-  width: 25px;
-  height: 200px;
-  background-color: #707c98;
-  border: 3px solid black;
+.disc {
+  margin: 0;
 }
 
-/*.big {
+.big {
   width: 150px;
   height: 75px;
   background-color: blue;
@@ -70,4 +75,4 @@ header {
   height: 75px;
   background-color: green;
   border: 3px solid black;
-}*/
+}
