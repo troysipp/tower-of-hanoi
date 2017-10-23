@@ -1,0 +1,3 @@
+/* I think the game would work better by
+appending divs to the three different areas
+and then moving them with the DOM */

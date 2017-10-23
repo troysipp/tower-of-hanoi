@@ -1,0 +1,73 @@
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffe0;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 150px;
+}
+
+header {
+  margin: 20px auto;
+}
+
+.gameboard {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.plate {
+  width: 700px;
+  height: 50px;
+  background-color: brown;
+  border: 3px solid black;
+}
+
+.areaOfPlay {
+  display: flex;
+  justify-content: space-around;
+}
+
+.first {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+.pole {
+  width: 25px;
+  height: 200px;
+  background-color: #707c98;
+  border: 3px solid black;
+}
+
+/*.big {
+  width: 150px;
+  height: 75px;
+  background-color: blue;
+  border: 3px solid black;
+}
+
+.medium {
+  width: 100px;
+  height: 75px;
+  background-color: red;
+  border: 3px solid black;
+}
+
+.small {
+  width: 50px;
+  height: 75px;
+  background-color: green;
+  border: 3px solid black;
+}*/
