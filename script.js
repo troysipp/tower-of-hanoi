@@ -12,6 +12,7 @@ $(document).ready(function() {
   let currentDisc = null;
   let currentPole = null;
   let poleNumber = null;
+  let currentNumber = null;
 
   // Make discs appear on first pole
 
@@ -21,20 +22,24 @@ $(document).ready(function() {
 
   createDiscs();
   selectFirstPole();
+  selectSecondPole()
 
   // User should be able to select a div and select a location
   // Div should disappear from first location and reappear at second location
 
   function selectFirstPole(discNumber) {
     firstPole.on("click", function(e) {
-      currentPole = this;
       poleNumber = "first"
       if (discNumber === undefined && firstPoleList.length > 0) {
-        selectOtherPole(firstPoleList[firstPoleList.length - 1]);
+        currentPole = this;
+        currentNumber = firstPoleList[firstPoleList.length - 1]
+        selectOtherPole(currentNumber);
+        console.log(currentNumber);
         currentDisc = e.target;
+        console.log("taco");
         firstPoleList.pop()
-        console.log(firstPoleList)
-      } else if (firstPoleList.length > 0) {
+      } else {
+        if (firstPoleList.length > 0)
         firstPoleList.push(discNumber);
         whichDisc(discNumber);
         firstPole.append(currentDisc);
@@ -45,19 +50,22 @@ $(document).ready(function() {
 
   function selectSecondPole(discNumber) {
     secondPole.on("click", function(e) {
-      currentPole = this;
       if (discNumber === undefined && secondPoleList.length > 0) {
+        currentPole = this
         selectOtherPole(secondPoleList[secondPoleList.length - 1]);
         currentDisc = e.target;
       } else {
-        currentPole.remove(currentDisc)
-        console.log(currentPole)
+        if (secondPoleList.length > 0 && currentNumber > secondPoleList[secondPoleList.length - 1])
+        console.log("pizza")
+        currentDisc.remove()
+        currentPole = this;
         secondPoleList.push(discNumber);
+        console.log(firstPoleList)
         console.log(secondPoleList)
         // whichDisc(discNumber);
         secondPole.append(currentDisc);
         console.log(secondPole)
-        console.log($('areaOfPlay'))
+        console.log($('areaOfPlay').children())
         currentDisc = null;
         currentPole = null
       }
@@ -66,7 +74,7 @@ $(document).ready(function() {
 
   function selectOtherPole(discNumber) {
     if (poleNumber === "first") {
-      selectSecondPole();
+      selectSecondPole(discNumber);
       // selectThirdPole()
     } else if (poleNumber === "second"){
       selectFirstPole()
