@@ -14,6 +14,7 @@ $(document).ready(function() {
   let poleNumber = null;
   let discNumber = null;
   let previousPole = null;
+  let previousPoleList = [];
 
   // Make discs appear on first pole
 
@@ -41,40 +42,47 @@ $(document).ready(function() {
       if (previousPole === null && firstPoleList.length > 0) {
         previousPole = this;
         currentNumber = firstPoleList[firstPoleList.length - 1];
-        firstPoleList.pop();
+        console.log(currentNumber);
+        // firstPoleList.pop();
+        previousPoleList = firstPoleList;
         console.log(discNumber);
-        console.log(secondPoleList[secondPoleList.length - 1]);
-        console.log(firstPoleList[firstPoleList.length - 1]);
+        // console.log(secondPoleList[secondPoleList.length - 1]);
       } else {
         if (
           (previousPole !== null && firstPoleList.length === 0) ||
           (previousPole !== null &&
-            discNumber < firstPoleList[firstPoleList.length - 1])
+            currentNumber < firstPoleList[firstPoleList.length - 1])
         ) {
           firstPoleList.push(discNumber);
           currentDisc.remove();
           firstPole.prepend(currentDisc);
+          if (previousPoleList.length !== 0) {
+            previousPoleList.pop();
+          }
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
           previousPole = null;
           discNumber = null;
+          previousPoleList = [];
+          console.log(firstPoleList);
+          console.log(firstPoleList[firstPoleList.length - 1]);
+          console.log(secondPoleList);
         } else {
           currentNumber = null;
           currentDisc = null;
           currentPole = null;
           discNumber = null;
           previousPole = null;
+          previousPoleList = [];
         }
       }
     });
   }
-
   //if there's no input
   /* make currentPole something
 make currentNumber something
 make currentDisc something */
-
   //else there is an input
   /* remove currentDisc from its parent div
 pop currentNumber from its old array
@@ -83,7 +91,6 @@ Append currentDisc to new pole
 reset currentPole to null
 reset currentNumber to null
 reset currentDisc to null */
-
   function selectSecondPole() {
     secondPole.on("click", function(e) {
       if ($(e.target).hasClass("disc")) {
@@ -96,33 +103,40 @@ reset currentDisc to null */
       if (previousPole === null && secondPoleList.length > 0) {
         previousPole = this;
         currentNumber = secondPoleList[secondPoleList.length - 1];
-        secondPoleList.pop();
-        console.log(
-          secondPoleList[secondPoleList.length - (secondPoleList.length - 1)]
-        );
-        console.log(
-          firstPoleList[firstPoleList.length - (firstPoleList.length - 1)]
-        );
+        // secondPoleList.pop();
+        previousPoleList = secondPoleList;
+        console.log(currentNumber);
+        console.log(discNumber);
       } else {
         if (
           (previousPole !== null && secondPoleList.length === 0) ||
           (previousPole !== null &&
-            discNumber > secondPoleList[secondPoleList.length - 1])
+            currentNumber < secondPoleList[secondPoleList.length - 1])
         ) {
           secondPoleList.push(discNumber);
           currentDisc.remove();
           secondPole.prepend(currentDisc);
+          if (previousPoleList.length !== 0) {
+            previousPoleList.pop();
+          }
+          console.log(previousPoleList);
+          console.log(firstPoleList);
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
           previousPole = null;
           discNumber = null;
+          previousPoleList = [];
+          console.log(secondPoleList);
+          console.log(secondPoleList[secondPoleList.length - 1]);
+          console.log(firstPoleList);
         } else {
           currentDisc = null;
           currentPole = null;
           discNumber = null;
           previousPole = null;
           currentNumber = null;
+          previousPoleList = [];
         }
       }
     });
