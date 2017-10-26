@@ -12,7 +12,8 @@ $(document).ready(function() {
   let currentDisc = null;
   let currentPole = null;
   let poleNumber = null;
-  let currentNumber = null;
+  let discNumber = null;
+  let previousPole = null;
 
   // Make discs appear on first pole
 
@@ -22,67 +23,104 @@ $(document).ready(function() {
 
   createDiscs();
   selectFirstPole();
-  selectSecondPole()
+  selectSecondPole();
+  // selectThirdPole()
 
   // User should be able to select a div and select a location
   // Div should disappear from first location and reappear at second location
 
-  function selectFirstPole(discNumber) {
+  function selectFirstPole() {
     firstPole.on("click", function(e) {
-      poleNumber = "first"
-      if (discNumber === undefined && firstPoleList.length > 0) {
-        currentPole = this;
-        currentNumber = firstPoleList[firstPoleList.length - 1]
-        selectOtherPole(currentNumber);
-        console.log(currentNumber);
+      if ($(e.target).hasClass("disc")) {
         currentDisc = e.target;
-        console.log("taco");
-        firstPoleList.pop()
+      } else if ($(e.target).hasClass("pole")) {
+        currentPole = e.target;
+      }
+      // set discNumber
+      whichDiscNumber(currentDisc);
+      if (previousPole === null && firstPoleList.length > 0) {
+        previousPole = this;
+        currentNumber = firstPoleList[firstPoleList.length - 1];
+        firstPoleList.pop();
       } else {
-        if (firstPoleList.length > 0)
-        firstPoleList.push(discNumber);
-        whichDisc(discNumber);
-        firstPole.append(currentDisc);
-        currentDisc = null;
+        if (
+          (previousPole !== null && firstPoleList.length === 0) ||
+          (previousPole !== null &&
+            discNumber < firstPoleList[firstPoleList.length - 1])
+        ) {
+          console.log(currentDisc);
+          currentDisc.remove();
+          secondPole.append(currentDisc);
+
+          firstPoleList.push(discNumber);
+          console.log(firstPoleList);
+          console.log(secondPoleList);
+
+          currentDisc = null;
+          currentPole = null;
+          currentNumber = null;
+          previousPole = null;
+          console.log(currentDisc);
+          console.log(previousPole);
+        } else {
+          return;
+        }
       }
     });
   }
 
-  function selectSecondPole(discNumber) {
+  //if there's no input
+  /* make currentPole something
+make currentNumber something
+make currentDisc something */
+
+  //else there is an input
+  /* remove currentDisc from its parent div
+pop currentNumber from its old array
+Add it to its new array
+Append currentDisc to new pole
+reset currentPole to null
+reset currentNumber to null
+reset currentDisc to null */
+
+  function selectSecondPole() {
     secondPole.on("click", function(e) {
-      if (discNumber === undefined && secondPoleList.length > 0) {
-        currentPole = this
-        selectOtherPole(secondPoleList[secondPoleList.length - 1]);
+      if ($(e.target).hasClass("disc")) {
+        // Abstract out as function which is current disc
         currentDisc = e.target;
+      } else if ($(e.target).hasClass("pole")) {
+        currentPole = e.target;
+      }
+      whichDiscNumber(currentDisc);
+      if (previousPole === null && secondPoleList.length > 0) {
+        previousPole = this;
+        currentNumber = secondPoleList[secondPoleList.length - 1];
+        secondPoleList.pop();
+        console.log(previousPole);
+        console.log(discNumber);
       } else {
-        if (secondPoleList.length > 0 && currentNumber > secondPoleList[secondPoleList.length - 1])
-        console.log("pizza")
-        currentDisc.remove()
-        currentPole = this;
-        secondPoleList.push(discNumber);
-        console.log(firstPoleList)
-        console.log(secondPoleList)
-        // whichDisc(discNumber);
-        secondPole.append(currentDisc);
-        console.log(secondPole)
-        console.log($('areaOfPlay').children())
-        currentDisc = null;
-        currentPole = null
+        if (
+          (previousPole !== null && secondPoleList.length === 0) ||
+          (previousPole !== null &&
+            discNumber > secondPoleList[secondPoleList.length - 1])
+        ) {
+          secondPoleList.push(discNumber);
+          currentDisc.remove();
+          console.log(firstPoleList);
+          console.log(secondPoleList);
+          secondPole.append(currentDisc);
+          currentDisc = null;
+          currentPole = null;
+          currentNumber = null;
+          previousPole = null;
+          console.log(currentDisc);
+          console.log(currentNumber);
+          console.log(previousPole);
+        } else {
+          return;
+        }
       }
     });
-  }
-
-  function selectOtherPole(discNumber) {
-    if (poleNumber === "first") {
-      selectSecondPole(discNumber);
-      // selectThirdPole()
-    } else if (poleNumber === "second"){
-      selectFirstPole()
-      selectThirdPole()
-    } else {
-      selectFirstPole()
-      selectSecondPole()
-    }
   }
 
   // Select first pole
@@ -91,18 +129,18 @@ $(document).ready(function() {
   // If other pole has no numbers smaller than top of first pole, allow selection
   // function move disc
 
-  function whichDisc(discNumber) {
-    if (discNumber === 1) {
-      currentDisc = smallDisc;
+  function whichDiscNumber(currentDisc) {
+    if ($(currentDisc).hasClass("small")) {
+      discNumber = 1;
       return currentDisc;
-    } else if (discNumber === 2) {
-      currentDisc = mediumDisc;
+    } else if ($(currentDisc).hasClass("medium")) {
+      discNumber = 2;
       return currentDisc;
-    } else  if (discNumber === 3) {
-      currentDisc = bigDisc;
+    } else if ($(currentDisc).hasClass("big")) {
+      discNumber = 3;
       return currentDisc;
     } else {
-      break
+      return;
     }
   }
 
