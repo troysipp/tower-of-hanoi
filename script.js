@@ -48,19 +48,17 @@ $(document).ready(function() {
           (previousPole !== null &&
             discNumber < firstPoleList[firstPoleList.length - 1])
         ) {
-          console.log(currentDisc);
-          currentDisc.remove();
-          secondPole.append(currentDisc);
-
           firstPoleList.push(discNumber);
+          currentDisc.remove();
           console.log(firstPoleList);
           console.log(secondPoleList);
-
+          firstPole.prepend(currentDisc);
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
           previousPole = null;
           console.log(currentDisc);
+          console.log(currentNumber);
           console.log(previousPole);
         } else {
           return;
@@ -108,7 +106,7 @@ reset currentDisc to null */
           currentDisc.remove();
           console.log(firstPoleList);
           console.log(secondPoleList);
-          secondPole.append(currentDisc);
+          secondPole.prepend(currentDisc);
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
