@@ -1,12 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+@import url("https://fonts.googleapis.com/css?family=Muli");
+
 body {
   display: flex;
   flex-direction: column;
   background-color: #ffffe0;
+  font-family: "Noto Sans", sans-serif;
 }
+
+/*When browswer width is less than 1008px, make mobile adaptable*/
 
 main {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 
 nav {
@@ -15,10 +22,13 @@ nav {
   flex-direction: column;
   width: 250px;
   margin: 20px;
+  background-color: #ffcc99;
+  padding: 40px;
 }
 
 header {
   margin: 20px auto;
+  font-family: "Muli", sans-serif;
 }
 
 .gameboard {
@@ -29,7 +39,7 @@ header {
 .plate {
   width: 700px;
   height: 50px;
-  background-color: brown;
+  background-color: #654321;
   border: 3px solid black;
   margin-top: 0;
 }
@@ -42,7 +52,7 @@ header {
 .pole {
   width: 25px;
   height: 400px;
-  background-color: #707c98;
+  background-color: #c0c0c0;
   border-top: 3px solid black;
   border-left: 3px solid black;
   border-right: 3px solid black;
