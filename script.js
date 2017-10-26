@@ -24,7 +24,7 @@ $(document).ready(function() {
   createDiscs();
   selectFirstPole();
   selectSecondPole();
-  // selectThirdPole()
+  // selectThirdPole();
 
   // User should be able to select a div and select a location
   // Div should disappear from first location and reappear at second location
@@ -42,6 +42,9 @@ $(document).ready(function() {
         previousPole = this;
         currentNumber = firstPoleList[firstPoleList.length - 1];
         firstPoleList.pop();
+        console.log(discNumber);
+        console.log(secondPoleList[secondPoleList.length - 1]);
+        console.log(firstPoleList[firstPoleList.length - 1]);
       } else {
         if (
           (previousPole !== null && firstPoleList.length === 0) ||
@@ -50,18 +53,18 @@ $(document).ready(function() {
         ) {
           firstPoleList.push(discNumber);
           currentDisc.remove();
-          console.log(firstPoleList);
-          console.log(secondPoleList);
           firstPole.prepend(currentDisc);
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
           previousPole = null;
-          console.log(currentDisc);
-          console.log(currentNumber);
-          console.log(previousPole);
+          discNumber = null;
         } else {
-          return;
+          currentNumber = null;
+          currentDisc = null;
+          currentPole = null;
+          discNumber = null;
+          previousPole = null;
         }
       }
     });
@@ -94,8 +97,12 @@ reset currentDisc to null */
         previousPole = this;
         currentNumber = secondPoleList[secondPoleList.length - 1];
         secondPoleList.pop();
-        console.log(previousPole);
-        console.log(discNumber);
+        console.log(
+          secondPoleList[secondPoleList.length - (secondPoleList.length - 1)]
+        );
+        console.log(
+          firstPoleList[firstPoleList.length - (firstPoleList.length - 1)]
+        );
       } else {
         if (
           (previousPole !== null && secondPoleList.length === 0) ||
@@ -104,18 +111,18 @@ reset currentDisc to null */
         ) {
           secondPoleList.push(discNumber);
           currentDisc.remove();
-          console.log(firstPoleList);
-          console.log(secondPoleList);
           secondPole.prepend(currentDisc);
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
           previousPole = null;
-          console.log(currentDisc);
-          console.log(currentNumber);
-          console.log(previousPole);
+          discNumber = null;
         } else {
-          return;
+          currentDisc = null;
+          currentPole = null;
+          discNumber = null;
+          previousPole = null;
+          currentNumber = null;
         }
       }
     });
