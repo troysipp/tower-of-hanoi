@@ -41,15 +41,17 @@ header {
 
 .pole {
   width: 25px;
-  height: 200px;
+  height: 400px;
   background-color: #707c98;
   border-top: 3px solid black;
   border-left: 3px solid black;
   border-right: 3px solid black;
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
+  align-content: flex-end;
+  margin: 0 100px;
 }
 
 .disc {
@@ -59,6 +61,8 @@ header {
 .big {
   width: 150px;
   height: 75px;
+  max-width: 150px;
+  max-height: 75;
   background-color: blue;
   border: 3px solid black;
 }
