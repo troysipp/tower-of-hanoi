@@ -11,6 +11,7 @@ $(document).ready(function() {
   const bigDisc = $("<div class='big disc'></div>");
   let currentDisc = null;
   let currentPole = null;
+  let currentNumber = null;
   let poleNumber = null;
   let discNumber = null;
   let previousPole = null;
@@ -32,20 +33,26 @@ $(document).ready(function() {
 
   function selectFirstPole() {
     firstPole.on("click", function(e) {
-      if ($(e.target).hasClass("disc")) {
-        currentDisc = e.target;
-      } else if ($(e.target).hasClass("pole")) {
-        currentPole = e.target;
-      }
-      // set discNumber
-      whichDiscNumber(currentDisc);
+      currentPole = this;
+      // if ($(e.target).hasClass("disc")) {
+      //   currentDisc = e.target;
+      // } else if ($(e.target).hasClass("pole")) {
+      // currentPole = e.target;
+      // }
+      // // set discNumber
+      // whichDiscNumber(currentDisc);
       if (previousPole === null && firstPoleList.length > 0) {
-        previousPole = this;
         currentNumber = firstPoleList[firstPoleList.length - 1];
+        if ($(currentPole).hasClass("first")) {
+          currentDisc = $(".first")
+            .children()
+            .first();
+        }
+        previousPole = this;
+        // currentNumber = firstPoleList[firstPoleList.length - 1];
         console.log(currentNumber);
         // firstPoleList.pop();
         previousPoleList = firstPoleList;
-        console.log(discNumber);
         // console.log(secondPoleList[secondPoleList.length - 1]);
       } else {
         if (
@@ -93,27 +100,37 @@ reset currentNumber to null
 reset currentDisc to null */
   function selectSecondPole() {
     secondPole.on("click", function(e) {
-      if ($(e.target).hasClass("disc")) {
-        // Abstract out as function which is current disc
-        currentDisc = e.target;
-      } else if ($(e.target).hasClass("pole")) {
-        currentPole = e.target;
-      }
-      whichDiscNumber(currentDisc);
+      currentPole = this;
+      whichPole(currentPole);
+      // if ($(e.target).hasClass("disc")) {
+      //   // Abstract out as function which is current disc
+      // currentDisc = e.target;
+      // } else if ($(e.target).hasClass("pole")) {
+      //   currentPole = e.target;
+      // }
+      // // whichDiscNumber(currentDisc);
       if (previousPole === null && secondPoleList.length > 0) {
-        previousPole = this;
+        if ($(currentPole).hasClass("second")) {
+          currentDisc = $(".second")
+            .children()
+            .first();
+          console.log(currentNumber);
+          console.log(currentDisc);
+        }
         currentNumber = secondPoleList[secondPoleList.length - 1];
+        previousPole = this;
+        // currentNumber = secondPoleList[secondPoleList.length - 1];
         // secondPoleList.pop();
         previousPoleList = secondPoleList;
         console.log(currentNumber);
-        console.log(discNumber);
       } else {
         if (
           (previousPole !== null && secondPoleList.length === 0) ||
           (previousPole !== null &&
             currentNumber < secondPoleList[secondPoleList.length - 1])
         ) {
-          secondPoleList.push(discNumber);
+          console.log(currentNumber);
+          secondPoleList.push(currentNumber);
           currentDisc.remove();
           secondPole.prepend(currentDisc);
           if (previousPoleList.length !== 0) {
@@ -163,6 +180,24 @@ reset currentDisc to null */
     }
   }
 
+  function whichPole(currentPole) {
+    if ($(currentPole).hasClass("first")) {
+      currentDisc = $(".first")
+        .children()
+        .first();
+      console.log(currentNumber);
+      console.log(currentDisc);
+    } else if ($(currentPole).hasClass("second")) {
+      // currentDisc = $(".second:first-child");
+      return currentNumber;
+    } else if ($(currentPole).hasClass("third")) {
+      currentNumber = thirdPoleList[thirdPoleList.length - 1];
+      currentDisc = $(".third:first-child");
+      return currentNumber;
+    } else {
+      return;
+    }
+  }
   // if you click a disc
   // its parent should lose that disc as a child element
 });
