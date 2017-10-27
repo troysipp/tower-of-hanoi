@@ -32,6 +32,16 @@ header {
   font-size: 22px;
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  width: 80%;
+  height: 80%;
+  overflow: auto;
+  background-color: #f0f8ff;
+}
+
 .gameboard {
   display: flex;
   flex-direction: column-reverse;

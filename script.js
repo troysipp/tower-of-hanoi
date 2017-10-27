@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  // Set constant variables
   const firstPole = $(".first");
   const secondPole = $(".second");
   const thirdPole = $(".third");
@@ -9,13 +10,17 @@ $(document).ready(function() {
   const smallDisc = $("<div class='small disc'></div>");
   const mediumDisc = $("<div class='medium disc'></div>");
   const bigDisc = $("<div class='big disc'></div>");
+  // Set variables that update with disc and pole selection
   let currentDisc = null;
   let currentPole = null;
   let currentNumber = null;
   let poleNumber = null;
   let previousPole = null;
   let previousPoleList = [];
+  // Set move counter variables
   let moveCount = 0;
+  // Set modal variables
+  let modal = $(".modal");
 
   // Make discs appear on first pole
 
@@ -168,7 +173,8 @@ $(document).ready(function() {
           discNumber = null;
           previousPoleList = [];
           if (thirdPoleList.length === 3) {
-            alert("You won the game!");
+            modal.style.display = "block";
+            // alert("You won the game!");
           }
         } else {
           currentNumber = null;
