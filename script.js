@@ -42,10 +42,12 @@ $(document).ready(function() {
   // Div should disappear from first location and reappear at second location
 
   function selectFirstPole() {
+    // Add event listener on first pole
     firstPole.on("click", function(e) {
       currentPole = this;
       // The choosing-a-disc-to-move case
       if (previousPole === null && firstPoleList.length > 0) {
+        // Set variables to relevent values
         currentNumber = firstPoleList[firstPoleList.length - 1];
         if ($(currentPole).hasClass("first")) {
           currentDisc = $(".first")
@@ -56,10 +58,14 @@ $(document).ready(function() {
         previousPoleList = firstPoleList;
       } else {
         if (
+          // The choosing-a-spot-to-put-a-disc case
+          // Condition saying you can put any disc on an empty pole
           (previousPole !== null && firstPoleList.length === 0) ||
+          // Condition that ensures bigger disc can't go on top of smaller ones
           (previousPole !== null &&
             currentNumber < firstPoleList[firstPoleList.length - 1])
         ) {
+          // Update JS data-accounting and DOM to mimic
           firstPoleList.push(currentNumber);
           currentDisc.remove();
           firstPole.prepend(currentDisc);
@@ -67,6 +73,7 @@ $(document).ready(function() {
             previousPoleList.pop();
           }
           moveCounter();
+          // Then reset variables that change every time to defaults
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
@@ -74,6 +81,7 @@ $(document).ready(function() {
           discNumber = null;
           previousPoleList = [];
         } else {
+          // The something-went-wrong case where all the variables reset to their defaults
           currentNumber = null;
           currentDisc = null;
           currentPole = null;
