@@ -29,6 +29,7 @@ nav {
 header {
   margin: 20px auto;
   font-family: "Muli", sans-serif;
+  font-size: 22px;
 }
 
 .gameboard {
@@ -66,6 +67,17 @@ header {
 
 .disc {
   margin: 0;
+}
+
+.moveCounter {
+  background-color: #ffcc99;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  font-weight: normal;
 }
 
 .big {

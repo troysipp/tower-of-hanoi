@@ -15,6 +15,7 @@ $(document).ready(function() {
   let poleNumber = null;
   let previousPole = null;
   let previousPoleList = [];
+  let moveCount = 0;
 
   // Make discs appear on first pole
 
@@ -29,12 +30,21 @@ $(document).ready(function() {
   selectSecondPole();
   selectThirdPole();
 
+  // Add move counter
+
+  function moveCounter() {
+    moveCount += 1;
+    $(".moveCounter").text(moveCount);
+    console.log(moveCount);
+  }
+
   // User should be able to select a div and select a location
   // Div should disappear from first location and reappear at second location
 
   function selectFirstPole() {
     firstPole.on("click", function(e) {
       currentPole = this;
+      // The choosing-a-disc-to-move case
       if (previousPole === null && firstPoleList.length > 0) {
         currentNumber = firstPoleList[firstPoleList.length - 1];
         if ($(currentPole).hasClass("first")) {
@@ -43,7 +53,6 @@ $(document).ready(function() {
             .first();
         }
         previousPole = this;
-        console.log(currentNumber);
         previousPoleList = firstPoleList;
       } else {
         if (
@@ -57,15 +66,13 @@ $(document).ready(function() {
           if (previousPoleList.length !== 0) {
             previousPoleList.pop();
           }
+          moveCounter();
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
           previousPole = null;
           discNumber = null;
           previousPoleList = [];
-          console.log(firstPoleList);
-          console.log(firstPoleList[firstPoleList.length - 1]);
-          console.log(secondPoleList);
         } else {
           currentNumber = null;
           currentDisc = null;
@@ -86,37 +93,29 @@ $(document).ready(function() {
           currentDisc = $(".second")
             .children()
             .first();
-          console.log(currentNumber);
-          console.log(currentDisc);
         }
         currentNumber = secondPoleList[secondPoleList.length - 1];
         previousPole = this;
         previousPoleList = secondPoleList;
-        console.log(currentNumber);
       } else {
         if (
           (previousPole !== null && secondPoleList.length === 0) ||
           (previousPole !== null &&
             currentNumber < secondPoleList[secondPoleList.length - 1])
         ) {
-          console.log(currentNumber);
           secondPoleList.push(currentNumber);
           currentDisc.remove();
           secondPole.prepend(currentDisc);
           if (previousPoleList.length !== 0) {
             previousPoleList.pop();
           }
-          console.log(previousPoleList);
-          console.log(firstPoleList);
+          moveCounter();
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
           previousPole = null;
           discNumber = null;
           previousPoleList = [];
-          console.log(secondPoleList);
-          console.log(secondPoleList[secondPoleList.length - 1]);
-          console.log(firstPoleList);
         } else {
           currentDisc = null;
           currentPole = null;
@@ -140,7 +139,6 @@ $(document).ready(function() {
             .first();
         }
         previousPole = this;
-        console.log(currentNumber);
         previousPoleList = thirdPoleList;
       } else {
         if (
@@ -154,6 +152,7 @@ $(document).ready(function() {
           if (previousPoleList.length !== 0) {
             previousPoleList.pop();
           }
+          moveCounter();
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
@@ -163,8 +162,6 @@ $(document).ready(function() {
           if (thirdPoleList.length === 3) {
             alert("You won the game!");
           }
-          console.log(thirdPoleList);
-          console.log(thirdPoleList[thirdPoleList.length - 1]);
         } else {
           currentNumber = null;
           currentDisc = null;
