@@ -12,11 +12,6 @@
       <h1>Tower of Hanoi</h1>
     </header>
     <main>
-      <div class="game">
-        <div class="end modal">
-          <h1>Congratulations!  You won the game!</h1>
-        </div>
-      </div>
       <nav>
         <p>Tower of Hanoi is a mathematical puzzle invented in 1883 where the objective is to move a stack of discs from the first rod to the third.</p>
         <p>There are only three rules:</p>
@@ -27,8 +22,17 @@
         </ul>
       </nav>
       <div class='gameboard'>
+
         <div class='plate'></div>
         <div class='areaOfPlay'>
+          <div class="game">
+            <div class="end modal">
+              <div class="modalHeaderDiv">
+                <h1 class="modalHeader">Congratulations!  You won the game!</h1>
+                <a class = "replay" href="index.html">Play again!</a>
+              </div>
+            </div>
+          </div>
           <div class='first pole'>
             <!-- <div class='big disc'></div>
             <div class='medium disc'></div>

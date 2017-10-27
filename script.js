@@ -20,7 +20,7 @@ $(document).ready(function() {
   // Set move counting variables
   let moveCount = 0;
   // Set modal variables
-  let modal = $(".modal");
+  const modal = $(".modal");
 
   // Make discs appear on first pole
 
@@ -172,7 +172,7 @@ $(document).ready(function() {
           discNumber = null;
           previousPoleList = [];
           if (thirdPoleList.length === 3) {
-            modal.style.display = "block";
+            $(".modal").css("display", "block");
             // alert("You won the game!");
           }
         } else {
