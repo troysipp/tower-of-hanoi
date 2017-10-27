@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  // Set constant variables
   const firstPole = $(".first");
   const secondPole = $(".second");
   const thirdPole = $(".third");
@@ -9,12 +10,14 @@ $(document).ready(function() {
   const smallDisc = $("<div class='small disc'></div>");
   const mediumDisc = $("<div class='medium disc'></div>");
   const bigDisc = $("<div class='big disc'></div>");
+  // Set variables that update with each new move
   let currentDisc = null;
   let currentPole = null;
   let currentNumber = null;
   let poleNumber = null;
   let previousPole = null;
   let previousPoleList = [];
+  // Set move counting variables
   let moveCount = 0;
 
   // Make discs appear on first pole
@@ -34,8 +37,7 @@ $(document).ready(function() {
 
   function moveCounter() {
     moveCount += 1;
-    $(".moveCounter").text(moveCount);
-    console.log(moveCount);
+    $(".counter").text(moveCount);
   }
 
   // User should be able to select a div and select a location
@@ -168,7 +170,11 @@ $(document).ready(function() {
           discNumber = null;
           previousPoleList = [];
           if (thirdPoleList.length === 3) {
-            alert("You won the game!");
+            if (moveCount === 7) {
+              alert("You won the game in the minimal number of moves!");
+            } else {
+              alert("You won the game!");
+            }
           }
         } else {
           currentNumber = null;
