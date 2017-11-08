@@ -6,13 +6,17 @@
     <link rel='stylesheet' href='style.css' type='text/css' />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" defer></script>
     <script src='script.js' type='text/javascript' defer></script>
+    <!-- With HTML, always use double quotes instead of single (opposite for JS) -->
   </head>
   <body>
     <header>
-      <h1>Tower of Hanoi</h1>
+      <h1>Towers of Hanoi</h1>
+      <!-- I think its technically "Towers"; plural -->
     </header>
+    <!-- Good use of HTML5 semantic elements -->
     <main>
       <nav>
+        <!-- Not sure this is really a `nav` as there aren't links -->
         <p>Tower of Hanoi is a mathematical puzzle invented in 1883 where the objective is to move a stack of discs from the first rod to the third.</p>
         <p>There are only three rules:</p>
         <ul class='directions'>
@@ -22,14 +26,15 @@
         </ul>
       </nav>
       <div class='gameboard'>
-
         <div class='plate'></div>
         <div class='areaOfPlay'>
+          <!-- all class and id names should be kebob-cased, not camelCased -->
           <div class="game">
             <div class="end modal">
               <div class="modalHeaderDiv">
                 <h1 class="modalHeader">Congratulations!  You won the game!</h1>
-                <a class = "replay" href="https://troysipp.github.io/tower-of-hanoi/">Play again!</a>
+                <a class="replay" href="https://troysipp.github.io/tower-of-hanoi/">Play again!</a>
+                <!-- No spacing around `=` in HTML, only in JS -->
               </div>
             </div>
           </div>
@@ -38,6 +43,12 @@
             <div class='medium disc'></div>
             <div class='small disc'></div> -->
           </div>
+          <!-- While this is completely fine and does work, since these poles will be
+          unique elements and there is a set number of them, we could use ids here
+          instead of classes: -->
+          <!-- <div class="pole" id="first"></div> -->
+          <!-- This would be a little better because we can keep classes for styling and
+          ids for functionality -->
           <div class='second pole'>
           </div>
           <div class='third pole'>

@@ -22,6 +22,8 @@ $(document).ready(function() {
   // Set modal variables
   const modal = $(".modal");
 
+  // Good job grouping all variable declarations together at the top
+
   // Make discs appear on first pole
 
   function createDiscs() {
@@ -29,12 +31,28 @@ $(document).ready(function() {
   }
   createDiscs();
 
+  // Think about how you might modify `createDiscs` to allow for a dynamic number of
+  // discs each with dynamic styling. Something like:
+
+  // function createDiscs (count) {
+  //   for (let i = 0; i < count; i++) {
+  //     let newDisc = $(`<div class='disc' data-size='${i}' style='width: ${...calculate}'></div>`)
+  //     newDisc.on('click', function () {
+  //       // ...
+  //     })
+        // set the event listeners on generation
+  //     firstPole.append(newDisc)
+  //   }
+  // }
+
   // Call all listener events
 
   selectFirstPole();
   selectSecondPole();
   selectThirdPole();
 
+  // If you set the event listeners as part of the disc generation process, you won't
+  // need to set up functions like the ones above to do this
   // Add move counter
 
   function moveCounter() {
@@ -51,6 +69,8 @@ $(document).ready(function() {
       currentPole = this;
       // The choosing-a-disc-to-move case
       if (previousPole === null && firstPoleList.length > 0) {
+
+        // the code block below could be abstracted into a `setSourcePole` function or something similar
         // Set variables to relevent values
         currentNumber = firstPoleList[firstPoleList.length - 1];
         if ($(currentPole).hasClass("first")) {
@@ -60,8 +80,13 @@ $(document).ready(function() {
         }
         previousPole = this;
         previousPoleList = firstPoleList;
+
+
       } else {
+
+
         if (
+          // this rule checking code could be in a `checkRules` function
           // The choosing-a-spot-to-put-a-disc case
           // Condition saying you can put any disc on an empty pole
           (previousPole !== null && firstPoleList.length === 0) ||
@@ -69,6 +94,8 @@ $(document).ready(function() {
           (previousPole !== null &&
             currentNumber < firstPoleList[firstPoleList.length - 1])
         ) {
+
+          // this code that actually executes the move could be in a `moveDisc` function
           // Update JS data-accounting and DOM to mimic
           firstPoleList.push(currentNumber);
           currentDisc.remove();
@@ -78,6 +105,8 @@ $(document).ready(function() {
           }
           moveCounter();
           // Then reset variables that change every time to defaults
+
+          // a `resetMoves` function
           currentDisc = null;
           currentPole = null;
           currentNumber = null;
@@ -93,9 +122,22 @@ $(document).ready(function() {
           previousPole = null;
           previousPoleList = [];
         }
+
+
       }
     });
   }
+  // Definitely think about two things with your select functions:
+  // - How can you abstract this function to simply be `selectPole`
+  // and have it internally determine which pole to select / modify
+  // based on some parameter:
+  // ```
+  //   function selectPole (pole) {
+  //     // ...
+  //   }
+  // ```
+  // - Also, look into how you can break this one, huge function up into individual,
+  // more targeted functions that can be called form within `selectPole`
 
   function selectSecondPole() {
     secondPole.on("click", function(e) {
@@ -187,3 +229,10 @@ $(document).ready(function() {
     });
   }
 });
+
+// Really solid approach, organization, and semantic naming. However, you definitely want
+// to break your code up into smaller functions much more. Remember, ideally, a function should be
+// focused on doing **one** thing very well. You then can have top-level functions that run
+// the procedures of the game by calling other functions. The end result of doing this is that
+// you won't have as much repetitive code (i.e. selectFirstPole vs selectThirdPole) and the code
+// will be more readable / mantainable. Overall, really excellent work here though.
